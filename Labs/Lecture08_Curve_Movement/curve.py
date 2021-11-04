@@ -82,20 +82,122 @@ def draw_curve_4_points(p1, p2, p3, p4):
 
     # draw p3-p4
     for i in range(50, 100, 2):
-        t = i / 100
+        t = i / 1000
         x = (2*t**2-3*t+1)*p2[0]+(-4*t**2+4*t)*p3[0]+(2*t**2-t)*p4[0]
         y = (2*t**2-3*t+1)*p2[1]+(-4*t**2+4*t)*p3[1]+(2*t**2-t)*p4[1]
         draw_point((x, y))
     draw_point(p4)
 
+def blend_lines(p1, p2, p3, p4):
+    x1,y1 = p1; x2,y2 = p2; x3,y3 = p3; x4,y4 = p4
 
+    draw_big_point(p1)
+    draw_big_point(p2)
+    draw_big_point(p3)
+    draw_big_point(p4)
 
+    #draw 2 lines
+    # draw_line(p2, p3)
+    # draw_line(p4, p1)
+
+    for i in range(0, 100, 2):
+        t = i / 100
+        lx = (1-t)*x2 + t*x3
+        ly = (1-t)*y2 + t*y3
+
+        rx = (1-t)*x4 + t*x1
+        ry = (1-t)*y4 + t*y1
+
+        draw_point((lx, ly))
+        draw_point((rx, ry))
+
+        x = (1-t)*lx + t*rx
+        y = (1-t)*ly + t*ry
+
+        draw_point((x,y))
+
+def draw_curve_3_points(p1, p2, p3):
+    draw_big_point(p1)
+    draw_big_point(p2)
+    draw_big_point(p3)
+
+    x1, y1 = p1; x2,y2 = p2; x3,y3 =p3
+
+    for i in range(0,100,2):
+        t = i/100
+        x = (2*t**2-3*t+1)*x1 + (-4*t**2+4*t)*x2 + (2*t**2-t)*x3
+        y = (2*t**2-3*t+1)*y1 + (-4*t**2+4*t)*y2 + (2*t**2-t)*y3
+        draw_point((x,y))
+    draw_point(p3)
+
+def draw_line(p1,p2):
+    x1, y1 = p1
+    x2, y2 = p2
+
+    draw_big_point(p1)
+    draw_big_point(p2)
+
+    # t = -1 ~ 1
+    for i in range(0, 100, 2):
+        t = i / 100
+        x = (1-t) * x1 + t * x2
+        y = (1-t) * y1 + t * y2
+        draw_point((x, y))
+    
+    draw_point(p2)
 
 
 prepare_turtle_canvas()
 
 
+p1 = x1, y1 = random.randint(100, 200), random.randint(100,200)
+p2 = x2, y2 = random.randint(-300, -200), random.randint(100, 300)
+p3 = x3, y3 = random.randint(-300, -200), random.randint(-300, -100)
+p4 = x4, y4 = random.randint(200, 300), random.randint(-300, -100)
+p5 = x5, y5 = random.randint(200,300), random.randint(200,300)
+#draw_line(p1,p2)
 
+def draw_curve_5_points(p1,p2,p3,p4,p5):
+    draw_big_point(p1)
+    draw_big_point(p2)
+    draw_big_point(p3)
+    draw_big_point(p4)
+    draw_big_point(p5)
 
+    for i in range(0, 50, 2):
+        t = i / 100
+        x = (2*t**2-3*t+1)*p1[0]+(-4*t**2+4*t)*p2[0]+(2*t**2-t)*p3[0]
+        y = (2*t**2-3*t+1)*p1[1]+(-4*t**2+4*t)*p2[1]+(2*t**2-t)*p3[1]
+        draw_point((x, y))
+    draw_point(p2)
 
+    # for i in range(0, 50, 2):
+    #     t = i / 100
+    #     x = (2*t**2-3*t+1)*p2[0]+(-4*t**2+4*t)*p3[0]+(2*t**2-t)*p4[0]
+    #     y = (2*t**2-3*t+1)*p2[1]+(-4*t**2+4*t)*p3[1]+(2*t**2-t)*p4[1]
+    #     draw_point((x, y))
+    # draw_point(p3)
+
+    for i in range(0, 100, 2):
+        t = i / 100
+        x = ((-t**3 + 2*t**2 - t)*p1[0] + (3*t**3 - 5*t**2 + 2)*p2[0] + (-3*t**3 + 4*t**2 + t)*p3[0] + (t**3 - t**2)*p4[0])/2
+        y = ((-t**3 + 2*t**2 - t)*p1[1] + (3*t**3 - 5*t**2 + 2)*p2[1] + (-3*t**3 + 4*t**2 + t)*p3[1] + (t**3 - t**2)*p4[1])/2
+        draw_point((x, y))
+    draw_point(p3)
+
+    for i in range(0, 100, 2):
+        t = i / 100
+        x = ((-t**3 + 2*t**2 - t)*p2[0] + (3*t**3 - 5*t**2 + 2)*p3[0] + (-3*t**3 + 4*t**2 + t)*p4[0] + (t**3 - t**2)*p5[0])/2
+        y = ((-t**3 + 2*t**2 - t)*p2[1] + (3*t**3 - 5*t**2 + 2)*p3[1] + (-3*t**3 + 4*t**2 + t)*p4[1] + (t**3 - t**2)*p5[1])/2
+        draw_point((x, y))
+    draw_point(p4)
+
+    for i in range(50, 100, 2):
+        t = i / 100
+        x = (2*t**2-3*t+1)*p3[0]+(-4*t**2+4*t)*p4[0]+(2*t**2-t)*p5[0]
+        y = (2*t**2-3*t+1)*p3[1]+(-4*t**2+4*t)*p4[1]+(2*t**2-t)*p5[1]
+        draw_point((x, y))
+    draw_point(p5)
+
+draw_curve_5_points(p3,p2,p4,p1,p5)
 turtle.done()
