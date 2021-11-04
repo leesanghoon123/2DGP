@@ -18,8 +18,6 @@ boy = None
 grass = None
 font = None
 
-
-
 def enter():
     global boy, grass
     boy = Boy()
@@ -51,8 +49,6 @@ def handle_events():
         else:
             boy.handle_event(event)
 
-
-
 def update():
     boy.update()
 
@@ -61,6 +57,8 @@ def draw():
     grass.draw()
     boy.draw()
     update_canvas()
+
+
 
 
 
